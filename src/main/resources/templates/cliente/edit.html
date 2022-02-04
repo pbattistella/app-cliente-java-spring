@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Controle de Clientes</title>
+  <link rel="shortcut icon" th:href="@{/img/logo.png}" type="image/x-icon">
+  <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/fontawesome-5.15.3/css/all.min.css}">
+  <link rel="stylesheet" th:href="@{/css/estilo.css}">
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" th:href="@{/}">Controle de Clientes</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" th:href="@{/cliente/list}">Principal</a>
+          </li>
+          <li class="nav-item">
+            <form th:action="@{/logout}" class="navbar-form" method="POST">
+              <button class="btn btn-dark" type="submit">
+                Sair <i class="fas fa-sign-out-alt"></i>
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-formulario">
+    <div class="div-title">
+      <h2>Cliente</h2>
+    </div>
+
+    <form th:action="@{/cliente/save}" method="post" th:object="${cliente}">
+      <div th:if="${erro}" class="alert alert-danger">
+        <span th:text="${erroMsg}"></span>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="number" class="form-control" id="floatingInputId" placeholder="Código" readonly th:field="${cliente.id}">
+        <label for="floatingInputId">Código</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInputNome" placeholder="Nome" th:field="${cliente.nome}" required>
+        <label for="floatingInputNome">Nome</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInputEmail" placeholder="E-mail" th:field="${cliente.email}"
+          required>
+        <label for="floatingInputEmail">E-mal</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="date" class="form-control" id="floatingInputDate" placeholder="Data de nascimento"
+          th:field="${cliente.dataNascimento}" required>
+        <label for="floatingInputDate">Data de nascimento</label>
+      </div>
+
+      <div class="form-floating mb-3 alert alert-light" role="alert">
+        Endereço
+        <hr>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInputCep" placeholder="CEP" th:field="${cliente.endereco.cep}"
+          required onblur="verificarCep()">
+        <label for="floatingInputCep">CEP</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInputLogradouro" placeholder="Logradouro" th:field="${cliente.endereco.logradouro}"
+          required>
+        <label for="floatingInputRua">Logradouro</label>
+      </div>
+
+      <div class="row g-2 div-col-2">
+        <div class="col-md">
+          <div class="form-floating">
+            <input type="number" class="form-control" id="floatingInputNumero" placeholder="Número" th:field="${cliente.endereco.numero}"
+              required>
+            <label for="floatingInputNumero">Número</label>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputComplemento" placeholder="Complemento" th:field="${cliente.endereco.complemento}">
+            <label for="floatingInputComplemento">Complemento</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-2 div-col-2">
+        <div class="col-md">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputBairro" placeholder="Bairro" th:field="${cliente.endereco.bairro}"
+              required>
+            <label for="floatingInputBairro">Bairro</label>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputLocalidade" placeholder="Localidade" th:field="${cliente.endereco.localidade}"
+              required>
+            <label for="floatingInputLocalidade">Localidade</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-2 div-col-2">
+        <div class="col-md">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputUF" placeholder="Estado" th:field="${cliente.endereco.uf}"
+              required>
+            <label for="floatingInputUF">Estado</label>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputPais" placeholder="País" th:field="${cliente.endereco.pais}"
+              required>
+            <label for="floatingInputPais">País</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row div-col-2">
+        <div class="col">
+          <a th:href="@{/cliente/list}" class="btn btn-outline-secondary btn-form">
+            Voltar <i class="fa fa-backspace"></i> 
+          </a>
+        </div>
+        <div class="col-md">
+          <button type="submit" class="btn btn-outline-success btn-form">
+            Salvar <i class="fa fa-save"></i>
+          </button>
+        </div>
+      </div>
+
+
+    </form>
+
+
+
+  </div>
+
+  <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+  <script th:src="@{/js/popper.mim.js}"></script>
+  <script th:src="@{/bootstrap-5.0.0/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

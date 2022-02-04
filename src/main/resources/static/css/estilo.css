@@ -1,0 +1,72 @@
+.form-login{
+    margin: auto;
+    margin-top: 40px;
+    width: 25%;
+    padding: 8px;
+    border: 2px solid #33004b;
+    border-radius: 8px;
+
+}
+
+.div-title{
+    margin-bottom: 16px;
+    background-color: #33004b;
+    color: #e6e6e6;
+    border-radius: 10px;
+    padding: 6px;
+    text-align: center;
+}
+
+.btn-entrar{
+    margin-top: 16px;
+    width: 100%;
+}
+
+.div-principal{
+    margin: auto;
+    margin-top: 40px;
+    width: 45%;
+}
+
+.div-principal img{
+    width: 98%;
+    border-radius: 10px;
+}
+
+.container{
+    margin: auto;
+    margin-top: 16px;
+    width: 80%;
+}
+
+.div-btn-novo{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-align: right;
+}
+
+.btn-novo{
+    padding:8px;
+}
+
+.container-formulario{
+    margin: auto;
+    margin-top: 16px;
+    width: 60%;
+}
+
+.btn-form{
+    width: 100%;
+    margin-bottom: 8px;   
+}
+
+.div-col-2{
+    margin-top: 16px;
+}
+
+.modal-header-color{
+    background: #b6003a;
+    color: white;
+    font-weight: bold;
+}
